@@ -2,6 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const { MongoClient } = require('mongodb');
 const authRoutes = require('./routes/auth');
+const courseRoutes = require('./routes/courses');
 
 dotenv.config();
 
@@ -29,6 +30,7 @@ app.get('/api/health', (req, res) => {
 connectDB().then((db) => {
     app.locals.db = db; // Store db for routes
     app.use('/api/auth', authRoutes); // Mount auth routes
+    app.use('/api/courses', courseRoutes); // Mount course routes
     app.listen(port, () => {
         console.log(`Server running on port ${port}`);
     });
